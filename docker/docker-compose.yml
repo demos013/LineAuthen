@@ -1,0 +1,15 @@
+version: "3.3"
+
+services:
+  healthcheck:
+    build: go/
+    command: gin
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=develop
+    volumes:
+      - ./../pkg/mod/cache:/go/pkg/mod/cache
+      - ./../src/healthcheck:/go/src/healthcheck
+    entrypoint: sh /root/entrypoint.sh
+    container_name: healthcheck
