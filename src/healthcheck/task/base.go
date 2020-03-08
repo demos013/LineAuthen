@@ -20,12 +20,11 @@ func CheckWebsite(fileName string) {
 		return
 	}
 
-	r := funk.Map(raw, func(x []string) string {
+	websiteList := funk.Map(raw, func(x []string) string {
 		return x[0]
 	})
 
-	websiteList := r.([]string)
-	res := util.CheckWebsite(websiteList)
+	res := util.CheckWebsite(websiteList.([]string))
 
 	duration := time.Since(start)
 	fmt.Println(fmt.Sprintf("Total times to finished checking website: %s", util.FmtDuration(duration)))

@@ -16,7 +16,7 @@ type WebsiteCheckStatusOutput struct {
 }
 
 const (
-	SIZE = 300
+	SIZE = 64
 )
 
 func CheckWebsite(list []string) WebsiteCheckStatusOutput {
@@ -75,7 +75,7 @@ func CheckWebsite(list []string) WebsiteCheckStatusOutput {
 
 func ping(url string, ch chan int) {
 	tr := &http.Transport{
-		IdleConnTimeout: 10 * time.Second,
+		IdleConnTimeout: 5 * time.Second,
 	}
 	client := &http.Client{Transport: tr}
 	r, _ := http.NewRequest("GET", url, nil)
@@ -91,9 +91,9 @@ func ping(url string, ch chan int) {
 func FmtDuration(d time.Duration) string {
 	timedif := d
 	min := timedif / time.Minute
-	timedif -= min
+	timedif = timedif % time.Minute
 	sec := timedif / time.Second
-	timedif -= sec
+	timedif = timedif % time.Second
 	milli := timedif.Milliseconds()
 
 	return fmt.Sprintf("%d/%d/%d", milli, sec, min)
