@@ -35,7 +35,7 @@ func CheckWebsite(fileName string) {
 
 	fmt.Println("")
 	if err != nil || status != 200 {
-		fmt.Println("Fail to send the report via Healcheck Report API")
+		fmt.Println("Fail to send the report via Healtcheck Report API")
 		return
 	}
 	fmt.Println("Send the report via Healcheck Report API success")
